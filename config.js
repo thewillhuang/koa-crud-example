@@ -1,6 +1,7 @@
 const {
   PORT = 3001,
-  PGCONNECTIONSTRING = 'postgres://willh@localhost/willh',
+  USER_NAME = 'willh',
+  PGCONNECTIONSTRING = `postgres://${USER_NAME}@localhost/${USER_NAME}`,
   NODE_ENV = 'development',
   DATABASE = 'wrenchsessions',
   HOST = 'localhost',
