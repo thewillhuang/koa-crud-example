@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha --compilers js:babel-register 'tests/**/*.@(js|jsx)'",
     "start": "node index",
+    "install": "node -v; npm run pgsetup; npm run mysqlsetup",
     "pgsetup": "psql -f model/psqlsetup.sql",
     "mysqlsetup": "mysql < model/mysqlsetup.sql"
   },
@@ -32,6 +33,7 @@
     "chai": "^3.4.1",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^3.1.0",
+    "eslint-plugin-react": "^3.15.0",
     "mocha": "^2.3.4",
     "moment": "^2.11.1",
     "node-uuid": "^1.4.7",

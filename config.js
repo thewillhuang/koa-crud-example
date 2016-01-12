@@ -1,19 +1,16 @@
 const port = process.env.PORT || 3001;
-// 'postgres://username:password@localhost/database';
+// 'postgres://username:password@localhost:port/database';
 const connectionString = process.env.PGCONNECTIONSTRING
   || 'postgres://willh@localhost/willh';
 const env = process.env.NODE_ENV || 'development';
 const mysqldb = {
   database: process.env.DATABASE || 'wrenchsessions',
   connectionLimit: 100,
-  // // aws rds
-  // host: process.env.HOST || 'procore.mvp0120.us-west-2.rds.amazonaws.com',
-  // user: process.env.USER || 'user',
-  // password: process.env.PASSWORD || 'pw',
+  // aws rds
+  host: process.env.HOST || 'localhost',
+  user: process.env.USER || 'root',
+  // password: process.env.PASSWORD || '',
   // ssl: 'Amazon RDS',
-  // localhost
-  host: 'localhost',
-  user: 'root',
 };
 
 export {

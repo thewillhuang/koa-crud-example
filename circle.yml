@@ -1,0 +1,13 @@
+machine:
+  services:
+    - docker
+    - postgresql
+    - mysql
+dependencies:
+  override:
+    - docker info
+    - docker build -t circleci/wrenchsessions:$CIRCLE_SHA1 .
+
+test:
+  override:
+    - docker run -d -e $PGCONNECTIONSTRING -e $HOST -e $USER -e $DATABASE circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
