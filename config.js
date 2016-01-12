@@ -21,6 +21,8 @@ const mysqldb = {
   // ssl: 'Amazon RDS',
 };
 
+console.log(env, connectionString, mysqldb, port);
+
 export {
   env,
   connectionString,
