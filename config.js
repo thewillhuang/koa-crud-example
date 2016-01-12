@@ -5,7 +5,7 @@ const {
   NODE_ENV = 'development',
   DATABASE = 'wrenchsessions',
   HOST = 'localhost',
-  MYSQLUSER = 'root',
+  USER = 'root',
   PASSWORD = '',
 } = process.env;
 
@@ -16,7 +16,7 @@ const mysqldb = {
   database: DATABASE,
   connectionLimit: 100,
   host: HOST,
-  user: MYSQLUSER,
+  user: USER,
   password: PASSWORD,
   // ssl: 'Amazon RDS',
 };
