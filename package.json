@@ -6,9 +6,9 @@
   "scripts": {
     "test": "mocha --compilers js:babel-register 'tests/**/*.@(js|jsx)'",
     "start": "node index",
-    "install": "node -v; npm run pgsetup; npm run mysqlsetup",
+    "install": "node -v",
     "pgsetup": "psql -f model/psqlsetup.sql",
-    "mysqlsetup": "mysql < model/mysqlsetup.sql"
+    "mysqlsetup": "mysql -uroot < model/mysqlsetup.sql"
   },
   "repository": {
     "type": "git",
