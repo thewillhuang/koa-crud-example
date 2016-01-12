@@ -16,4 +16,4 @@ test:
       /etc/postgresql/9.4/main/pg_hba.conf"
     - sudo /etc/init.d/postgresql restart
   override:
-    - docker run -d -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
+    - docker run -it -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
