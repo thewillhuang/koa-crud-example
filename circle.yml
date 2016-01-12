@@ -1,8 +1,12 @@
 machine:
+  pre:
+    - sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.1-circleci'
+    - sudo chmod 0755 /usr/bin/docker
   services:
     - docker
     - postgresql
     - mysql
+
 dependencies:
   override:
     - docker info
@@ -18,9 +22,9 @@ test:
     - ls
     - docker run -d circleci/wrenchsessions:$CIRCLE_SHA1 node index
     - ls
-    - sudo docker cp $(docker ps -alq):/app/ .
+    - sudo docker cp $(docker ps -alq):app/ .
     - ls
-    - psql -f model/psqlsetup.sql
-    - mysql -u $USER < model/mysqlsetup.sql
+    - psql -f app/model/psqlsetup.sql
+    - mysql -u $USER < app/model/mysqlsetup.sql
   override:
     - docker run -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
