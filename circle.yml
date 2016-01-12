@@ -25,4 +25,4 @@ test:
     - psql -f model/psqlsetup.sql
     - mysql -u $USER < model/mysqlsetup.sql
   override:
-    - docker run -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE --net="host" circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
+    - docker run -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE -ePORT=$PORT -p 3000:$PORT circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
