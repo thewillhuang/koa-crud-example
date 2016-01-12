@@ -15,7 +15,9 @@ test:
     - sudo bash -c "echo \"host all all 0.0.0.0/0 trust\" >>
       /etc/postgresql/9.4/main/pg_hba.conf"
     - sudo /etc/init.d/postgresql restart
+    - ls
     - docker run -d circleci/wrenchsessions:$CIRCLE_SHA1 node index
+    - ls
     - sudo docker cp $(docker ps -alq):/app/ .
     - ls
     - psql -f model/psqlsetup.sql
