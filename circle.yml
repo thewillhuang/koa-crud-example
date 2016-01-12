@@ -17,6 +17,7 @@ test:
     - sudo /etc/init.d/postgresql restart
     - docker run -d circleci/wrenchsessions:$CIRCLE_SHA1 node index
     - sudo docker cp $(docker ps -alq):/app/ .
+    - ls
     - psql -f model/psqlsetup.sql
     - mysql -u $USER < model/mysqlsetup.sql
   override:
