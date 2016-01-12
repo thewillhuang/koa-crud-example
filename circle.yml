@@ -1,6 +1,7 @@
 machine:
   pre:
-    - sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.1-circleci'
+    - sudo curl -L -o /usr/bin/docker \
+      'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.1-circleci'
     - sudo chmod 0755 /usr/bin/docker
   services:
     - docker
@@ -9,7 +10,8 @@ machine:
 
 dependencies:
   pre:
-    - sudo apt-add-repository -y 'deb http://ppa.launchpad.net/ondrej/mysql-experimental/ubuntu precise main'
+    - sudo apt-add-repository -y \
+      'deb http://ppa.launchpad.net/ondrej/mysql-experimental/ubuntu precise main'
     - sudo apt-get update; sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server-5.6
   override:
     - docker info
@@ -25,4 +27,4 @@ test:
     - psql -f model/psqlsetup.sql
     - mysql -u $USER < model/mysqlsetup.sql
   override:
-    - docker run -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE -ePORT=$PORT -p 3000:$PORT circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
+    - docker run --add-host=dockerhost:$(ip route | awk '/docker0/ { print $NF }') -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE -e PORT=$PORT -p 3000:$PORT circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
