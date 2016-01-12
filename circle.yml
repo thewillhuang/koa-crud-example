@@ -15,5 +15,8 @@ test:
     - sudo bash -c "echo \"host all all 0.0.0.0/0 trust\" >>
       /etc/postgresql/9.4/main/pg_hba.conf"
     - sudo /etc/init.d/postgresql restart
+    - docker cp $(docker ps -alq):/app/ .
+    - psql -f model/psqlsetup.sql
+    - mysql -u$USER < model/mysqlsetup.sql
   override:
     - docker run -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
