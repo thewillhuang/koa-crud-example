@@ -1,0 +1,40 @@
+{
+  "name": "session-server",
+  "version": "1.0.0",
+  "description": "prototype session-server for front-end session tracking",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-register 'tests/**/*.@(js|jsx)'",
+    "start": "node index",
+    "pgsetup": "psql -f model/psqlsetup.sql",
+    "mysqlsetup": "mysql < model/mysqlsetup.sql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/procore/wrench.git"
+  },
+  "author": "thewillhuang",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "koa": "^1.1.2",
+    "koa-bodyparser": "^2.0.1",
+    "koa-compress": "^1.0.8",
+    "koa-logger": "^1.3.0",
+    "koa-router": "^5.3.0",
+    "mysql2": "^0.15.8",
+    "pg": "^4.4.3"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.4.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "chai": "^3.4.1",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^3.1.0",
+    "mocha": "^2.3.4",
+    "moment": "^2.11.1",
+    "node-uuid": "^1.4.7",
+    "supertest": "^1.1.0"
+  }
+}
