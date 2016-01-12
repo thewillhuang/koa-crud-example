@@ -8,6 +8,7 @@ const {
   MYSQLUSER = 'root',
   PASSWORD = '',
 } = process.env;
+
 const port = PORT;
 const connectionString = PGCONNECTIONSTRING;
 const env = NODE_ENV;

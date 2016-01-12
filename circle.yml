@@ -10,12 +10,12 @@ dependencies:
 
 test:
   pre:
-    # - sudo bash -c "echo \"listen_addresses = '*'\" >>
-    #   /etc/postgresql/9.4/main/postgresql.conf"
-    # - sudo bash -c "echo \"host all all 0.0.0.0/0 trust\" >>
-    #   /etc/postgresql/9.4/main/pg_hba.conf"
-    # - sudo /etc/init.d/postgresql restart
-    - sudo docker cp (docker ps -aq):/app/ .
+    - sudo bash -c "echo \"listen_addresses = '*'\" >>
+      /etc/postgresql/9.4/main/postgresql.conf"
+    - sudo bash -c "echo \"host all all 0.0.0.0/0 trust\" >>
+      /etc/postgresql/9.4/main/pg_hba.conf"
+    - sudo /etc/init.d/postgresql restart
+    - sudo docker cp (docker ps -alq):/app/ .
     - psql -f model/psqlsetup.sql
     - mysql -u $USER < model/mysqlsetup.sql
   override:
