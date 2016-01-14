@@ -26,9 +26,7 @@ test:
     - sudo /etc/init.d/postgresql restart
     - HOSTNAME=$(hostname)
     - HOST_IP=$(ip route | awk '/docker/ { print $NF }')
-  override:
     - psql -f model/psqlsetup.sql
     - mysql -u $USER < model/mysqlsetup.sql
-    - docker network ls
-    - docker network inspect bridge
-    - docker run -P -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE -e PORT=$PORT circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
+  override:
+    - docker run -P -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST_IP -e USER=$USER -e DATABASE=$DATABASE -e PORT=$PORT circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
