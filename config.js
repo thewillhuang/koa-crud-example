@@ -1,12 +1,12 @@
 const {
   PORT = 3001,
   USER_NAME = 'willh',
-  PGCONNECTIONSTRING = `postgres://${USER_NAME}@localhost/${USER_NAME}`,
   NODE_ENV = 'development',
   DATABASE = 'wrenchsessions',
   HOST = 'localhost',
   USER = 'root',
   PASSWORD = '',
+  PGCONNECTIONSTRING = `postgres://${USER_NAME}@${HOST}/${USER_NAME}`,
 } = process.env;
 
 const port = PORT;
