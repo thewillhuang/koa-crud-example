@@ -24,9 +24,8 @@ test:
     - sudo bash -c "echo \"host all all 0.0.0.0/0 trust\" >>
       /etc/postgresql/9.4/main/pg_hba.conf"
     - sudo /etc/init.d/postgresql restart
-    - HOSTNAME=$(hostname)
-    - HOST_IP=$(ip route | awk '/docker/ { print $NF }')
+    - alias hostip="ip route show 0.0.0.0/0 | grep -Eo 'via \S+' | awk '{ print \$2 }'"
     - psql -f model/psqlsetup.sql
     - mysql -u $USER < model/mysqlsetup.sql
   override:
-    - docker run -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST_IP -e USER=$USER -e DATABASE=$DATABASE -e PORT=$PORT circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
+    - docker run -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$(hostip) -e USER=$USER -e DATABASE=$DATABASE -e PORT=$PORT circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
