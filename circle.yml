@@ -27,4 +27,6 @@ test:
   override:
     - psql -f model/psqlsetup.sql
     - mysql -u $USER < model/mysqlsetup.sql
+    - docker network ls
+    - docker network inspect bridge
     - docker run -P -e PGCONNECTIONSTRING=$PGCONNECTIONSTRING -e HOST=$HOST -e USER=$USER -e DATABASE=$DATABASE -e PORT=$PORT circleci/wrenchsessions:$CIRCLE_SHA1 npm run test;
